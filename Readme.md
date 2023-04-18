@@ -14,14 +14,12 @@ Web services: The app includes web services that allow data to be shared and spe
 
 ## Installation
 To install MaxFit, follow these steps:
-
-## Clone the MaxFit repository from GitHub.
+Clone the MaxFit repository from GitHub.
 Deploy the code to your Salesforce org using the Salesforce CLI or a deployment tool.
 Grant access to the necessary profiles and sharing rules.
 Configure the app to meet your organization's needs.
 ## Usage
 To use MaxFit, follow these steps:
-
 Log in to your Salesforce org.
 Navigate to the MaxFit app.
 Use the app to manage your events and attendees.
