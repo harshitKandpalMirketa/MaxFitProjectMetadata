@@ -1,7 +1,7 @@
 <!--
   @description       : Event Detail Page
   @author            : Harshit@mirketa.com
-  @last modified on  : 04-04-2023
+  @last modified on  : 04-18-2023
   @last modified by  : Harshit@mirketa.com
 -->
 <apex:page controller="EventDetailController">
@@ -10,6 +10,19 @@
 <style>
 .data2Col p {
     margin-top: 0;
+}
+.headerTitle {
+    font-size:30px; font-weight: bold;
+}
+.subTitle{
+    font-size:20px;
+}
+
+.boldText{
+    font-size:15px;font-weight: bold;
+}
+.normalText{
+    font-size:15px;
 }
 </style>
 
@@ -21,12 +34,12 @@
         <div style="text-align:center;">
 
              <!-- outputText for Event Name -->
-            <apex:outputText value="Event Name: {0}" style="font-size:30px; font-weight: bold;">
+            <apex:outputText value="Event Name: {0}" styleClass="headerTitle">
                 <apex:param value="{!event.Name__c}"/>
             </apex:outputText><br/><br/>
 
             <!-- outputText for Event Organizer -->
-            <apex:outputText value="Event Organiser: {0}"  style="font-size:20px;">
+            <apex:outputText value="Event Organiser: {0}"  styleClass="subTitle">
                 <apex:param value="{!event.Event_Organizer__r.Name}"/>
             </apex:outputText>
         </div>
@@ -34,9 +47,9 @@
         <div><br/>
         
             <!-- outputText for Event Location -->
-            <apex:outputText value="Event location: "  style="font-size:15px;font-weight: bold;"/>  
+            <apex:outputText value="Event location: "  styleClass="boldText"/>  
         
-            <apex:outputText value="{0}, {1}, {2}, {3}, {4}" style="font-size:15px;">
+            <apex:outputText value="{0}, {1}, {2}, {3}, {4}" styleClass="normalText">
                 <apex:param value="{!event.Location__r.Street__c}"/>
                 <apex:param value="{!event.Location__r.City__c}"/>
                 <apex:param value="{!event.Location__r.Postal_Code__c}"/>
@@ -45,8 +58,8 @@
             </apex:outputText><br/><br/>
             
             <!-- outputText for Event Starting Date -->
-            <apex:outputText value="Event Starting Date: "  style="font-size:15px;font-weight: bold;"/>  
-            <apex:outputText value="{0}"  style="font-size:15px;" >
+            <apex:outputText value="Event Starting Date: "  styleClass="boldText"/>  
+            <apex:outputText value="{0}"  styleClass="normalText" >
                 <apex:param value="{!event.Starting_Date__c}"/>
             </apex:outputText>
         </div><br/>
@@ -64,14 +77,14 @@
             <apex:pageBlockSection title="{!es.Speaker__r.Name}" columns="1" collapsible="false">
             
             <!-- outputText for Profile URL -->
-            <apex:outputText value="Profile URL:"  style="font-size:15px;font-weight: bold;text-align:center;"/>
-            <apex:outputText value="{0}" style="font-size:15px; margin-top: -10px;" >
+            <apex:outputText value="Profile URL:"  styleClass="boldText"/>
+            <apex:outputText value="{0}" styleClass="normalText" >
                 <apex:param value="{!es.Speaker__r.Profile_Url__c}"/>
             </apex:outputText>
 
             <!-- outputText for About Me -->
-            <apex:outputText value="About Me:"  style="font-size:15px;font-weight: bold;"/>            
-            <apex:outputText escape="false" value="{0}"  style="font-size:15px;">
+            <apex:outputText value="About Me:"  styleClass="boldText"/>            
+            <apex:outputText escape="false" value="{0}"  styleClass="normalText">
                 <apex:param value="{!es.Speaker__r.About_Me__c}"/>
             </apex:outputText>
              
