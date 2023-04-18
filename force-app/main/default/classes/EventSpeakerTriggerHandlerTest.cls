@@ -160,6 +160,34 @@ public class EventSpeakerTriggerHandlerTest {
         }
                
         Test.stopTest();
-        
+    }
+
+    @isTest
+    Public static void noConflictEvent(){
+        //Fetching event2
+
+        List<Event_Speaker__c> SpeakerRecords = [SELECT Id FROM Event_speaker__C ];
+        delete SpeakerRecords;
+
+        List<Event__c> event = [SELECT Id FROM Event__c WHERE End_Date__c = NEXT_N_DAYS:5 ];
+        Event__c event2 = event[0];
+
+        //Fetchting Speaker1
+        List<Speaker__c> speaker = [SELECT Id,Name,Email__c FROM Speaker__c WHERE Name = 'Test speaker1'];
+        Speaker__c speaker1 = speaker[0];
+
+        //Create conflicting Event speaker record with event that conflict with event in the object
+        Event_Speaker__c eventSpeaker2 = new Event_Speaker__c();
+        eventSpeaker2.Event__c = event2.Id;
+        eventSpeaker2.Speaker__c = speaker1.Id;
+
+        List<Event_Speaker__c> toPass = New List<Event_Speaker__c>();
+        toPass.add(eventSpeaker2);
+
+        Test.startTest();
+
+        EventSpeakerTriggerHandler.speakerBookingCheck(toPass); 
+
+        Test.stopTest();
     }
 }
