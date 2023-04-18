@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Speaker_Assignment</fullName>
+    <active>true</active>
+    <description>Speaker can only be associated with the Event whose End Date is in future &amp; Event Live Checkbox is checked</description>
+    <errorConditionFormula>OR(
+    DATEVALUE(Event__r.End_Date__c) &lt; TODAY(),
+    Event__r.Live__c = FALSE
+)</errorConditionFormula>
+    <errorDisplayField>Event__c</errorDisplayField>
+    <errorMessage>ERROR: &quot;Speaker can not be associated with the Event whose End Date is in past&quot; OR &quot;Event Live Checkbox is not checked&quot; .</errorMessage>
+</ValidationRule>

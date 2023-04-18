@@ -1,0 +1,30 @@
+<!--
+  @description       : Speaker Registration Page
+  @author            : Harshit@mirketa.com
+  @last modified on  : 04-04-2023
+  @last modified by  : Harshit@mirketa.com
+-->
+<apex:page controller="SpeakerRegistartionPageController" title="Speaker Registration">
+    <apex:form >
+        <apex:pageBlock id="block1" title="Speaker Registration">
+        
+            <!-- Taking input for speaker object -->
+            <apex:pageBlockSection id="section1" columns="2" collapsible="false" title="Speaker Details">
+                <apex:inputField required="true" value="{!speaker.Name }"/>
+                <apex:inputField value="{!speaker.Company__c }"/>        
+                <apex:inputField required="true" value="{!speaker.Email__c }"/>
+                <apex:inputField required="true" value="{!speaker.Phone__c }"/>
+
+                <!--  This will allow input of event when the Event_Speaker__c's Event__c field is not assigned in controller-->
+                <apex:inputField value="{!eveSpeaker.Event__c}" rendered="{!eveSpeaker.Event__c == null}" />
+
+                <!-- This will output the event when the Event_Speaker__c's Event__c field is assigned in controller-->
+                <apex:outputField value="{!eveSpeaker.Event__c}" rendered="{!eveSpeaker.Event__c != null}" />
+            </apex:pageBlockSection>
+                        
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!saveRecord}" value="Save"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

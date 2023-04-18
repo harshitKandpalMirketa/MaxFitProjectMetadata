@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Recurring_Frequency_Not_Filled</fullName>
+    <active>false</active>
+    <description>If Recurring? checkbox is not checked then user can not fill Frequency field</description>
+    <errorConditionFormula>AND(
+    Recurring__c = False,
+    NOT(ISPICKVAL(Frequency__c, &quot;&quot;))
+)</errorConditionFormula>
+    <errorDisplayField>Frequency__c</errorDisplayField>
+    <errorMessage>user must not fill Frequency field.</errorMessage>
+</ValidationRule>

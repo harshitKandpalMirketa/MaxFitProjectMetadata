@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>This will send a mail to email attendee for the confimation of booking.</description>
+        <name>Confirmation_Email</name>
+        <label>Confirmation Email</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>Confirmation_Email_Body</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>$Record.Attendee__r.Email__c</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>sendRichBody</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <elementReference>Confirmation_Attendee_Booking_Email_Subject</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>57.0</apiVersion>
+    <environments>Default</environments>
+    <interviewLabel>Confirmation attendee event booking email {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Confirmation attendee event booking email</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Confirmation_Email</targetReference>
+        </connector>
+        <object>Event_Attendee__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Draft</status>
+    <textTemplates>
+        <description>This is the subject of the Confirmation attendee booking email.</description>
+        <name>Confirmation_Attendee_Booking_Email_Subject</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Pass for the {!$Record.Event__r.Name__c}</text>
+    </textTemplates>
+    <textTemplates>
+        <description>Body for Confirmation attendee booking email</description>
+        <name>Confirmation_Email_Body</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;Dear {!$Record.Attendee__r.Name},&lt;/p&gt;&lt;p&gt;Thank you for registering for {!$Record.Event__r.Name__c} which will be Organized on {!$Record.Event__r.Starting_Date__c} &amp;amp; will be held in {!$Record.Event__r.Location__r.City__c}. We are excited to have you, see you at the event.&lt;/p&gt;&lt;p&gt;Thanks, &lt;/p&gt;&lt;p&gt;{!$Record.Event__r.Event_Organizer__r.Name}&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>

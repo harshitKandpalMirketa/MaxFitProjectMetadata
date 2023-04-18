@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alternative_Phone__c</fullName>
+    <description>This field contains Alternative Phone of Event Organizer</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Provide Alternative Phone of Event Organizer</inlineHelpText>
+    <label>Alternative Phone</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Phone</type>
+</CustomField>
