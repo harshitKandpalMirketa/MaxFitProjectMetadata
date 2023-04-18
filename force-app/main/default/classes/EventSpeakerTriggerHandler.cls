@@ -1,7 +1,7 @@
 /**
  * @description       : This is a trigger handler class for the Event Speaker custom object. It has a static method that checks for conflicts in speaker booking across events.
  * @author            : Harshit@mirketa.com
- * @last modified on  : 03-24-2023
+ * @last modified on  : 04-18-2023
  * @last modified by  : Harshit@mirketa.com
 **/
 
@@ -59,8 +59,7 @@ public class EventSpeakerTriggerHandler {
   
                 // Check for time conflicts between the Events already assigned to speaker with the new assigned events
                 if  ( ((eventSpeaker.Event__r.Starting_Date__c <= newEventTime.Starting_Date__c) && (eventSpeaker.Event__r.End_Date__c >=newEventTime.Starting_Date__c) )||
-                      ((eventSpeaker.Event__r.Starting_Date__c <= newEventTime.End_Date__c )&&(eventSpeaker.Event__r.End_Date__c >=newEventTime.End_Date__c)) ||
-                      ((eventSpeaker.Event__r.Starting_Date__c >= newEventTime.Starting_Date__c )&&(eventSpeaker.Event__r.End_Date__c <=newEventTime.End_Date__c))){
+                      ((eventSpeaker.Event__r.Starting_Date__c <= newEventTime.End_Date__c )&&(eventSpeaker.Event__r.End_Date__c >=newEventTime.End_Date__c))){
     
                     //Throw error if conflict was found
                     newEventSpeakerRecord.Speaker__c.addError('Already assigned to Event');

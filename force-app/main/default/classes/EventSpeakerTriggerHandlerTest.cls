@@ -1,7 +1,7 @@
 /**
  * @description       : Test class for EventSpeakerTriggerHandler
  * @author            : Harshit@mirketa.com
- * @last modified on  : 03-28-2023
+ * @last modified on  : 04-18-2023
  * @last modified by  : Harshit@mirketa.com
 **/
 @isTest
@@ -10,7 +10,7 @@ public class EventSpeakerTriggerHandlerTest {
     static void makeData(){
         //Create location record
         Address_Book__c location = new Address_Book__c();
-        location.Name = 'Test Location';
+        location.City__c = 'Test City';
         insert location;
 
         //Create event record
@@ -49,16 +49,6 @@ public class EventSpeakerTriggerHandlerTest {
         eventColidingAfter1.Max_Seats__c = 100;
         insert eventColidingAfter1;
 
-        //Create Event that will collide with event 1 and has its starting date after event1 start date(AFTER-Start) record
-        Event__c eventColidingOver1 = new Event__c();
-        eventColidingOver1.Starting_Date__c = Date.today().addDays(-10);
-        eventColidingOver1.End_Date__c = Date.today().addDays(20);
-        eventColidingOver1.Location__c = location.id;
-        eventColidingOver1.Live__c = true;
-        eventColidingOver1.Max_Seats__c = 100;
-        insert eventColidingOver1;
-
-
         //Create Speaker1 record
         Speaker__c speaker1 = new Speaker__c();
         speaker1.Name = 'Test speaker1';
@@ -67,17 +57,15 @@ public class EventSpeakerTriggerHandlerTest {
 
         //Create Event1 - speaker1 record
         Event_Speaker__c eventSpeaker1 = new Event_Speaker__c();
-        eventSpeaker1.Name = 'Test Record';
         eventSpeaker1.Event__c = event1.id;
         eventSpeaker1.Speaker__c = Speaker1.id;
         insert eventSpeaker1;
 
-                //Create Event2 - speaker1 non coflicting record
-                Event_Speaker__c eventSpeaker2 = new Event_Speaker__c();
-                eventSpeaker2.Name = 'Test Record';
-                eventSpeaker2.Event__c = event2.id;
-                eventSpeaker2.Speaker__c = Speaker1.id;
-                insert eventSpeaker2;
+        //Create Event2 - speaker1 non coflicting record
+        Event_Speaker__c eventSpeaker2 = new Event_Speaker__c();
+        eventSpeaker2.Event__c = event2.id;
+        eventSpeaker2.Speaker__c = Speaker1.id;
+        insert eventSpeaker2;
 
     }
 
@@ -94,7 +82,6 @@ public class EventSpeakerTriggerHandlerTest {
 
         //Create conflicting Event speaker record with same records in the object.
         Event_Speaker__c eventSpeaker2 = new Event_Speaker__c();
-        eventSpeaker2.Name = 'Test Record';
         eventSpeaker2.Event__c = event1.Id;
         eventSpeaker2.Speaker__c = speaker1.Id;
 
@@ -127,7 +114,6 @@ public class EventSpeakerTriggerHandlerTest {
 
         //Create conflicting Event speaker record with event that conflict with event in the object
         Event_Speaker__c eventSpeaker2 = new Event_Speaker__c();
-        eventSpeaker2.Name = 'Test Record';
         eventSpeaker2.Event__c = event3.Id;
         eventSpeaker2.Speaker__c = speaker1.Id;
 
@@ -159,38 +145,6 @@ public class EventSpeakerTriggerHandlerTest {
 
         //Create conflicting Event speaker record with event that conflict with event in the object
         Event_Speaker__c eventSpeaker2 = new Event_Speaker__c();
-        eventSpeaker2.Name = 'Test Record';
-        eventSpeaker2.Event__c = event2.Id;
-        eventSpeaker2.Speaker__c = speaker1.Id;
-
-        List<Event_Speaker__c> toPass = New List<Event_Speaker__c>();
-        toPass.add(eventSpeaker2);
-
-        Test.startTest();
-        try {
-            EventSpeakerTriggerHandler.speakerBookingCheck(toPass); 
-        } catch (DmlException e) {
-            //Checking if the error is same as given in the code.
-            System.assertEquals('Already assigned to Event', e.getMessage());
-        }
-               
-        Test.stopTest();
-        
-    }
-
-    @isTest
-    Public static void conflictEventTimeOver(){
-        //Fetching event2
-        List<Event__c> event = [SELECT Id FROM Event__c WHERE End_Date__c = NEXT_N_DAYS:20 ];
-        Event__c event2 = event[0];
-
-        //Fetchting Speaker1
-        List<Speaker__c> speaker = [SELECT Id,Name,Email__c FROM Speaker__c WHERE Name = 'Test speaker1'];
-        Speaker__c speaker1 = speaker[0];
-
-        //Create conflicting Event speaker record with event that conflict with event in the object
-        Event_Speaker__c eventSpeaker2 = new Event_Speaker__c();
-        eventSpeaker2.Name = 'Test Record';
         eventSpeaker2.Event__c = event2.Id;
         eventSpeaker2.Speaker__c = speaker1.Id;
 

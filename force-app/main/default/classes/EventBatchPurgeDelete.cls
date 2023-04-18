@@ -1,7 +1,7 @@
 /**
  * @description       : This is a batch class responsible for deleting event records that are 2 months old and are not live
  * @author            : Harshit@mirketa.com
- * @last modified on  : 03-23-2023
+ * @last modified on  : 04-18-2023
  * @last modified by  : Harshit@mirketa.com
 **/
 
@@ -18,7 +18,7 @@ public class EventBatchPurgeDelete implements Database.Batchable <SObject> {
     // Execute method to delete the retrieved event records
     public void execute(Database.BatchableContext bc, List<Event__c> eventIds){
         //Deleting the records
-        delete eventIds;
+        Database.delete(eventIds);
     }
     
     // Finish method to send a confirmation email after batch processing completes
